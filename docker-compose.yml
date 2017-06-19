@@ -1,0 +1,23 @@
+version: '2'
+services:
+  pgsql:
+    build: pgsql
+    image: maierru/pgsql
+    container_name: pgsql
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_USER: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ${SRV_DIR}/pgsql:/var/lib/postgresql/data
+  pgadmin:
+    build: pgadmin
+    image: maierru/pgadmin
+    container_name: pgadmin
+    restart: always
+    depends_on:
+      - pgsql
+    volumes:
+      - ${SRV_DIR}/pgadmin:/pgadmin
