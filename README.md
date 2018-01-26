@@ -5,7 +5,7 @@ Docker-compose for development purposes.
 
 To run all services
 
-$ docker-compose up
+$ docker-compose up -d
 
 List services
 
