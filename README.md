@@ -3,15 +3,36 @@
 
 Docker-compose for development purposes.
 
+## Setup
+
+### Storage path
+
+Rename `rename_to_.env` file to `.env` file
+Setup paths for services where they store data.
+
+### Access by name instead of localhost and port
+
+Add `127.0.0.1 *.localhost` to your __/etc/hosts__
+
+## Run
+
 To run all services
 
 $ docker-compose up -d
 
 Enter to http://localhost for futher instructions 
 
+# Debug
+
 List services
 
 $ docker-compose ps
+
+## Stop
+
+List services
+
+$ docker-compose down
 
 ## HAPROXY
 
@@ -85,7 +106,3 @@ $ PASSWORD=$(base64 < /dev/urandom | head -c8); echo "$PASSWORD"; echo -n "$PASS
 
 => 0eYzcsbP
 => 9902571f1a4f44ca13306301b73e581c567befdf6c788fe39f0f058b70ea63b6
-
-# FAQ
-
-Pro-Tip: To keep browsers from treating .localhost (and .test) domains as search terms, include the protocol when typing it into the URL field. For example: http://grafana.localhost rather than grafana.localhost

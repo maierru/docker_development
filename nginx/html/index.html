@@ -70,23 +70,22 @@
     Add '127.0.0.1 *.localhost' to your /etc/hosts to make available http://grafana.localhost/ (and others) or use with port (for
     example, http://localhost:3000)
   </p>
+
+  <p>
+    # FAQ Pro-Tip: To keep browsers from treating .localhost (and .test) domains as search terms, include the protocol when typing
+    it into the URL field. For example: http://grafana.localhost rather than grafana.localhost
+  </p>
+
 </div>
 
 <h2>Available internal services</h2>
 
   <ul>
-    <li>
-      mysql => localhost:3306 <br/>
-    </li>
-    <li>
-      postgresql => localhost:5432
-    </li>
-    <li>
-      influxdb => localhost:8086
-    </li>
-    <li>
-      clickhouse => localhost:8123
-    </li>
+    <li>mysql => localhost:3306</li>
+    <li>postgresql => localhost:5432</li>
+    <li>redis => localhost:6379</li>
+    <li>influxdb => localhost:8086</li>
+    <li>clickhouse => localhost:8123</li>
   </ul>
 
 </body>
