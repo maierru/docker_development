@@ -41,7 +41,7 @@ Add `127.0.0.1 *.localhost` to your __/etc/hosts__
 
 To run all services (with `--build` to make actual docker image) 
 
-$ docker-compose up -d --build
+$ docker-compose up -d --build --force-recreate
 
 Enter to http://localhost for futher instructions 
 
@@ -61,67 +61,67 @@ $ docker-compose down
 
 To run HAPROXY
 
-$ docker-compose up -d haproxy
+$ docker-compose up -d --build --force-recreate haproxy
 
 ## RSYSLOG
 
 To run RSYSLOG
 
-$ docker-compose up -d rsyslog
+$ docker-compose up -d --build --force-recreate rsyslog
 
 ## NGINX
 
 To run NGINX
 
-$ docker-compose up -d nginx
+$ docker-compose up -d --build --force-recreate nginx
 
 ## GRAFANA
 
 To run GRAFANA
 
-$ docker-compose up -d grafana
+$ docker-compose up -d --build --force-recreate grafana
 
 ## MYSQL
 
 To run MYSQL
 
-$ docker-compose up -d mysql
+$ docker-compose up -d --build --force-recreate mysql
 
 ## PHPMYADMNIN
 
 To run PHPMYADMNIN
 
-$ docker-compose up -d phpmyadmin
+$ docker-compose up -d --build --force-recreate phpmyadmin
 
 ## PGADMIN
 
 To run PGADMIN
 
-$ docker-compose up -d pgadmin
+$ docker-compose up -d --build --force-recreate pgadmin
 
 ## PGSQL
 
 To run PGSQL
 
-$ docker-compose up -d pgsql
+$ docker-compose up -d --build --force-recreate pgsql
 
 ## REDIS
 
 To run REDIS
 
-$ docker-compose up -d redis
+$ docker-compose up -d --build --force-recreate redis
 
 ## INFLUXDB
 
 To run INFLUXDB
 
-$ docker-compose up -d influxdb
+$ docker-compose up -d --build --force-recreate influxdb
 
 ## CLICKHOUSE
 
 To run CLICKHOUSE
 
-$ docker-compose up -d clickhouse-server
+$ docker-compose up -d --build --force-recreate clickhouse-server
 
 ### SHA256 password generation
 
