@@ -1,0 +1,16 @@
+<yandex>
+    <users>
+        <maier>
+            <password_sha256_hex>800c34a5f5eed17b4841e9cf9dd8582a2a431a10b33bce03b5be2d49a6effb94</password_sha256_hex>
+            <networks incl="networks"/>
+            <profile>default</profile>
+            <quota>default</quota>
+        </maier>
+        <haproxy>
+            <password_sha256_hex>9902571f1a4f44ca13306301b73e581c567befdf6c788fe39f0f058b70ea63b6</password_sha256_hex>
+            <networks incl="networks"/>
+            <profile>default</profile>
+            <quota>default</quota>
+        </haproxy>
+    </users>
+</yandex>

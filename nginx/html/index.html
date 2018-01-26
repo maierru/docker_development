@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Docker compose services!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1>Доступные веб сервисы в docker compose</h1>
+
+<ul>
+  <li>
+    <a href="http://localhost:2000/" target="_blank">Haproxy Stat</a>
+    <br/>
+  </li>
+  <li>
+    <a href="http://localhost:3000/" target="_blank">grafana</a><br/>
+  </li>
+  <li>
+    <a href="http://localhost:3310/" target="_blank">phpmyadmin</a><br/>
+  </li>
+  <li>
+    <a href="http://localhost:5050/" target="_blank">pgadmin</a><br/>
+  </li>
+  <li>
+    <a href="http://localhost:8083/" target="_blank">influxdb</a><br/>
+  </li>
+  <li>
+    <a href="http://localhost:8123/" target="_blank">clickhouse</a><br/>
+  </li>
+</ul>
+
+<h2>Доступные внутренние сервисы</h1>
+
+  <ul>
+    <li>
+      mysql => localhost:3306 <br/>
+    </li>
+    <li>
+      postgresql => localhost:5432
+    </li>
+    <li>
+      influxdb => localhost:8086
+    </li>
+    <li>
+      elasticsearch => localhost:9200
+    </li>
+  </ul>
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+<yandex>
+    <logger>
+        <!-- available levels: trace, debug, information, warning, error. Recommended trace, debug, information. -->
+        <level replace="replace">trace</level>
+        <log replace="replace">/dev/stdout</log>
+        <errorlog replace="replace">/dev/stderr</errorlog>
+        <size replace="replace">100M</size>
+        <count replace="replace">5</count>
+    </logger>
+
+    <include_from replace="replace">/etc/clickhouse-server/clickhouse.xml</include_from>
+<!--
+    <listen_host replace="replace">127.0.0.1</listen_host>
+-->
+</yandex>

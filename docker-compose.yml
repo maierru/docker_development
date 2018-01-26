@@ -1,17 +1,67 @@
 version: '2'
 services:
-  pgsql:
-    build: pgsql
-    image: maierru/pgsql
-    container_name: pgsql
+  haproxy:
+    build: haproxy
+    image: maier/haproxy
+    container_name: haproxy
+    restart: always
+    ports:
+      - "80:80"     # nginx
+      # - "514:514"   # rsyslog
+      - "2000:2000" # haproxy stats
+      - "3000:3000" # grafana
+      - "3306:3306" # mysql (percona)
+      - "3310:3310" # phpmyadmin (mysql web ui)
+      - "5050:5050" # pgadmin (pgsql web ui)
+      - "5432:5432" # pgsql
+      - "6379:6379" # redis
+      - "8083:8083" # influxdb web ui
+      - "8086:8086" # influxdb
+      - "8123:8123" # clickhouse-server
+      - "9000:9000" # clickhouse-server (for native client)
+      - "9009:9009" # clickhouse-server
+  rsyslog:
+    build: rsyslog
+    image: maier/rsyslog
+    container_name: rsyslog
+    restart: always
+    volumes:
+      - ${RSYSLOG_DIR}:/var/log      
+  nginx:
+    build: nginx
+    image: maier/nginx
+    container_name: nginx
+    restart: always
+    volumes:
+      - ${NGINX_LOG_DIR}:/srv/logs      
+  grafana:
+    build: grafana
+    image: maier/grafana
+    container_name: grafana
     restart: always
     environment:
-      POSTGRES_PASSWORD: 123456
-      POSTGRES_USER: postgres
-    ports:
-      - "5432:5432"
+      GF_SECURITY_ADMIN_PASSWORD: 123456
+      GF_INSTALL_PLUGINS: "vertamedia-clickhouse-datasource,grafana-influxdb-08-datasource,percona-percona-app"
     volumes:
-      - ${SRV_DIR}/pgsql:/var/lib/postgresql/data
+      - ${GRAFANA_DATA_DIR}:/var/lib/grafana
+  mysql:
+    build: mysql-percona
+    image: maier/mysql
+    container_name: mysql
+    restart: always
+    volumes:
+      - ${MYSQL_DATA_DIR}:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+  phpmyadmin:
+    build: phpmyadmin
+    image: maier/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    depends_on:
+      - mysql
+    environment:
+      PMA_HOST: mysql
   pgadmin:
     build: pgadmin
     image: maierru/pgadmin
@@ -20,4 +70,37 @@ services:
     depends_on:
       - pgsql
     volumes:
-      - ${SRV_DIR}/pgadmin:/pgadmin
+      - ${PGADMIN_DATA_DIR}:/pgadmin
+  pgsql:
+    build: pgsql
+    image: maierru/pgsql
+    container_name: pgsql
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_USER: postgres
+    volumes:
+      - ${PGSQL_DATA_DIR}:/var/lib/postgresql/data
+  redis:
+    build: redis
+    image: maier/redis
+    container_name: redis
+    restart: always
+    volumes:
+      - ${REDIS_DATA_DIR}:/var/lib/redis
+  influxdb:
+    build: influxdb
+    image: maier/influxdb
+    container_name: influxdb
+    restart: always
+    volumes:
+      - ${INFLUXDB_DATA_DIR}:/data
+  clickhouse-server:
+    build: clickhouse-server
+    image: maier/clickhouse-server
+    container_name: clickhouse-server
+    restart: always
+    volumes:
+      - ${CLICKHOUSEDB_DATA_DIR}:/opt/clickhouse
+    environment:
+      CLICKHOUSE_CONFIG: /etc/clickhouse-server/config.xml      
