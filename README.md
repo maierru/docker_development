@@ -7,6 +7,8 @@ To run all services
 
 $ docker-compose up -d
 
+Enter to http://localhost for futher instructions 
+
 List services
 
 $ docker-compose ps
@@ -83,3 +85,7 @@ $ PASSWORD=$(base64 < /dev/urandom | head -c8); echo "$PASSWORD"; echo -n "$PASS
 
 => 0eYzcsbP
 => 9902571f1a4f44ca13306301b73e581c567befdf6c788fe39f0f058b70ea63b6
+
+# FAQ
+
+Pro-Tip: To keep browsers from treating .localhost (and .test) domains as search terms, include the protocol when typing it into the URL field. For example: http://grafana.localhost rather than grafana.localhost

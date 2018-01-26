@@ -30,29 +30,49 @@
   <!-- End Google Tag Manager (noscript) -->
 <h1>Available docker compose services</h1>
 
-<ul>
-  <li>
-    <a href="http://localhost:2000/" target="_blank">Haproxy Stat</a>
-    <br/>
-  </li>
-  <li>
-    <a href="http://localhost:3000/" target="_blank">grafana</a><br/>
-  </li>
-  <li>
-    <a href="http://localhost:3310/" target="_blank">phpmyadmin</a><br/>
-  </li>
-  <li>
-    <a href="http://localhost:5050/" target="_blank">pgadmin</a><br/>
-  </li>
-  <li>
-    <a href="http://localhost:8083/" target="_blank">influxdb</a><br/>
-  </li>
-  <li>
-    <a href="http://localhost:8123/" target="_blank">clickhouse</a><br/>
-  </li>
-</ul>
+<table border="1">
+  <thead>
+    <th>Service name</th>
+    <th>haproxy (only)</th>
+    <th>nginx</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Haproxy Stat</td>
+      <td colspan="2" align="center"><a href="http://localhost:2000/" target="_blank">htpp://localhost:2000/</a></td>
+    </tr>
+    <tr>
+      <td>grafana</td>
+      <td><a href="http://localhost:3000/" target="_blank">http://localhost:3000/</a></td>
+      <td><a href="http://grafana.localhost/" target="_blank">http://grafana.localhost/</a></td>
+    </tr>
+    <tr>
+      <td>phpmyadmin</td>
+      <td><a href="http://localhost:3310/" target="_blank">http://localhost:3310/</a></td>
+      <td><a href="http://phpmyadmin.localhost/" target="_blank">http://phpmyadmin.localhost/</a></td>
+    </tr>
+    <tr>
+      <td>pgadmin</td>
+      <td><a href="http://localhost:5050/" target="_blank">http://localhost:5050/</a></td>
+      <td><a href="http://pgadmin.localhost/" target="_blank">http://pgadmin.localhost/</a></td>
+    </tr>
+    <tr>
+      <td>influxdb</td>
+      <td><a href="http://localhost:8083/" target="_blank">http://localhost:8083/</a></td>
+      <td><a href="http://influxdb.localhost/" target="_blank">http://influxdb.localhost/</a></td>
+    </tr>
+  </tbody>
+</table>
 
-<h2>Available internal services</h1>
+
+<div>
+  <p>
+    Add '127.0.0.1 *.localhost' to your /etc/hosts to make available http://grafana.localhost/ (and others) or use with port (for
+    example, http://localhost:3000)
+  </p>
+</div>
+
+<h2>Available internal services</h2>
 
   <ul>
     <li>
@@ -64,9 +84,9 @@
     <li>
       influxdb => localhost:8086
     </li>
-    <!-- <li>
-      elasticsearch => localhost:9200
-    </li> -->
+    <li>
+      clickhouse => localhost:8123
+    </li>
   </ul>
 
 </body>
