@@ -39,9 +39,9 @@ Add `127.0.0.1 *.localhost` to your __/etc/hosts__
 
 ### Run
 
-To run all services
+To run all services (with `--build` to make actual docker image) 
 
-$ docker-compose up -d
+$ docker-compose up -d --build
 
 Enter to http://localhost for futher instructions 
 
