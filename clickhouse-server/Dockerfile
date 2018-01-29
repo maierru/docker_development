@@ -1,4 +1,4 @@
-FROM yandex/clickhouse-server
+FROM yandex/clickhouse-server:1.1
 
 # FROM ubuntu:16.04
 
