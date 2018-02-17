@@ -105,6 +105,8 @@ To run PGSQL
 
 $ docker-compose up -d --build --force-recreate pgsql
 
+Add `host all all all md5` to yours pg_hba.conf to access pgsql
+
 ## REDIS
 
 To run REDIS

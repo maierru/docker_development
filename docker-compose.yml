@@ -9,7 +9,7 @@ services:
       - "80:80"     # nginx
       # - "514:514"   # rsyslog
       - "2000:2000" # haproxy stats
-      - "3000:3000" # grafana
+      - "3001:3000" # grafana
       - "3306:3306" # mysql (percona)
       - "3310:3310" # phpmyadmin (mysql web ui)
       - "5050:5050" # pgadmin (pgsql web ui)
