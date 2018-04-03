@@ -53,7 +53,7 @@ $ docker-compose ps
 
 ### Stop
 
-List services
+Stop services
 
 $ docker-compose down
 
