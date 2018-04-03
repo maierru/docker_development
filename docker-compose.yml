@@ -20,6 +20,7 @@ services:
       - "8123:8123" # clickhouse-server
       - "9000:9000" # clickhouse-server (for native client)
       - "9009:9009" # clickhouse-server
+      - "9042:9042" # cassandra-server
   rsyslog:
     build: rsyslog
     image: maier/rsyslog
@@ -104,3 +105,10 @@ services:
       - ${CLICKHOUSEDB_DATA_DIR}:/opt/clickhouse
     environment:
       CLICKHOUSE_CONFIG: /etc/clickhouse-server/config.xml      
+  cassandra:
+    build: cassandra
+    image: maier/cassandra
+    container_name: cassandra
+    restart: always
+    volumes:
+      - ${CASSANDRA_DATA_DIR}:/var/lib/cassandra
