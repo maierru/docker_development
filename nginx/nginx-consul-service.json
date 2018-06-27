@@ -1,0 +1,12 @@
+{
+  "service": {
+    "id": "nginx",
+    "name": "nginx",
+    "port": 80,
+    "checks": [{
+      "http": "http://127.0.0.1/nginx_status",
+      "interval": "10s",
+      "timeout": "9s"
+    }]
+  }
+}

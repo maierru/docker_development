@@ -144,6 +144,36 @@ COPY ./html /usr/share/nginx/html
 
 EXPOSE 80 443
 
-CMD ["nginx", "-g", "daemon off;"]
+########################################
+ENV CONSUL_TEMPLATE_VERSION 0.19.5
+
+ADD https://releases.hashicorp.com/consul-template/${CONSUL_TEMPLATE_VERSION}/consul-template_${CONSUL_TEMPLATE_VERSION}_linux_amd64.zip /
+
+RUN unzip consul-template_${CONSUL_TEMPLATE_VERSION}_linux_amd64.zip && \
+  mv consul-template /usr/local/bin/consul-template &&\
+  rm -rf /consul-template_${CONSUL_TEMPLATE_VERSION}_linux_amd64.zip && \
+  mkdir -p /consul-template /consul-template/config.d /consul-template/templates && \
+  apk add --no-cache curl
+#########################################
 
 
+#########################################
+ENV CONSUL_VERSION 1.2.0
+
+ADD https://releases.hashicorp.com/consul/${CONSUL_VERSION}/consul_${CONSUL_VERSION}_linux_amd64.zip /tmp/consul.zip
+
+RUN unzip -d /bin /tmp/consul.zip && \
+    rm -f /tmp/consul.zip
+
+ADD consul-agent.json /etc/consul/consul-agent.json
+#############################################
+
+##################
+RUN apk add --update supervisor && rm  -rf /tmp/* /var/cache/apk/*
+COPY supervisor.conf /etc/supervisor/conf.d/supervisor.conf
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod 755 /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
+####################################
+
+ADD nginx-consul-service.json /etc/consul.d/nginx-consul-service.json

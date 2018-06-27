@@ -18,6 +18,7 @@ services:
       - "8083:8083" # influxdb web ui
       - "8086:8086" # influxdb
       - "8123:8123" # clickhouse-server
+      - "8500:8500" # consul ui
       - "9000:9000" # clickhouse-server (for native client)
       - "9009:9009" # clickhouse-server
       - "9042:9042" # cassandra-server
@@ -26,20 +27,23 @@ services:
     image: maier/rsyslog
     container_name: rsyslog
     restart: always
+    hostname: rsyslog
     volumes:
-      - ${RSYSLOG_DIR}:/var/log      
+      - ${RSYSLOG_DIR}:/var/log
   nginx:
     build: nginx
     image: maier/nginx
     container_name: nginx
     restart: always
+    hostname: nginx
     volumes:
-      - ${NGINX_LOG_DIR}:/srv/logs      
+      - ${NGINX_LOG_DIR}:/srv/logs
   grafana:
     build: grafana
     image: maier/grafana
     container_name: grafana
     restart: always
+    hostname: grafana
     environment:
       GF_SECURITY_ADMIN_PASSWORD: 123456
       GF_INSTALL_PLUGINS: "vertamedia-clickhouse-datasource,grafana-influxdb-08-datasource,percona-percona-app"
@@ -50,6 +54,7 @@ services:
     image: maier/mysql
     container_name: mysql
     restart: always
+    hostname: mysql
     volumes:
       - ${MYSQL_DATA_DIR}:/var/lib/mysql
     environment:
@@ -59,6 +64,7 @@ services:
     image: maier/phpmyadmin
     container_name: phpmyadmin
     restart: always
+    hostname: phpmyadmin
     depends_on:
       - mysql
     environment:
@@ -68,6 +74,7 @@ services:
     image: maierru/pgadmin
     container_name: pgadmin
     restart: always
+    hostname: pgadmin
     depends_on:
       - pgsql
     volumes:
@@ -77,6 +84,7 @@ services:
     image: maierru/pgsql
     container_name: pgsql
     restart: always
+    hostname: pgsql
     environment:
       POSTGRES_PASSWORD: 123456
       POSTGRES_USER: postgres
@@ -86,6 +94,7 @@ services:
     build: redis
     image: maier/redis
     container_name: redis
+    hostname: redis
     restart: always
     volumes:
       - ${REDIS_DATA_DIR}:/var/lib/redis
@@ -94,6 +103,7 @@ services:
     image: maier/influxdb
     container_name: influxdb
     restart: always
+    hostname: influxdb
     volumes:
       - ${INFLUXDB_DATA_DIR}:/data
   clickhouse-server:
@@ -101,14 +111,40 @@ services:
     image: maier/clickhouse-server
     container_name: clickhouse-server
     restart: always
+    hostname: clickhouse-server
     volumes:
       - ${CLICKHOUSEDB_DATA_DIR}:/opt/clickhouse
     environment:
-      CLICKHOUSE_CONFIG: /etc/clickhouse-server/config.xml      
+      CLICKHOUSE_CONFIG: /etc/clickhouse-server/config.xml
   cassandra:
     build: cassandra
     image: maier/cassandra
     container_name: cassandra
     restart: always
+    hostname: cassandra
     volumes:
       - ${CASSANDRA_DATA_DIR}:/var/lib/cassandra
+  consul1:
+    build: consul
+    image: maier/consul
+    container_name: consul1
+    hostname: consul1
+    restart: always
+    environment:
+      - "CONSUL_BIND_INTERFACE=eth0"
+  consul2:
+    build: consul
+    image: maier/consul
+    container_name: consul2
+    hostname: consul2
+    environment:
+      - "CONSUL_BIND_INTERFACE=eth0"
+    command: "agent -dev -join=consul1"
+  consul3:
+    build: consul
+    image: maier/consul
+    container_name: consul3
+    hostname: consul3
+    environment:
+      - "CONSUL_BIND_INTERFACE=eth0"
+    command: "agent -dev -join=consul1"

@@ -1,0 +1,6 @@
+{
+  "data_dir": "/consul/data",
+  "log_level": "INFO",
+  "client_addr": "0.0.0.0",
+  "start_join": ["consul1"]
+}
